@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.google.code.gson:gson:2.10")
     implementation("org.apache.logging.log4j:log4j-api-kotlin:1.2.0")
     testImplementation(kotlin("test"))
 }
