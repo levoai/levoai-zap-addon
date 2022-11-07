@@ -59,6 +59,11 @@ zapAddOn {
 }
 
 spotless {
+    kotlin {
+        licenseHeaderFile("gradle/spotless/license.kt")
+        ktlint()
+    }
+
     kotlinGradle {
         ktlint()
     }
