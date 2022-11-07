@@ -12,7 +12,7 @@ private const val PARAM_CONFIRM_ON_REMOVE = "$PARAM_BASE_KEY.confirmOnRemove"
 
 class LevoParam : VersionedAbstractParam(), Logging {
 
-    internal var enabled: Boolean = true
+    internal var enabled: Boolean = false
         set(value) {
             field = value
             config.setProperty(PARAM_ENABLED, value)
