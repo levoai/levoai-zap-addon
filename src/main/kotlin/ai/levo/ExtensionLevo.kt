@@ -38,6 +38,7 @@ class ExtensionLevo : ExtensionAdaptor(), Logging {
         extensionHook?.addHttpSenderListener(LevoHttpSenderListener(this))
 
         if (hasView()) {
+            extensionHook?.hookView?.addOptionPanel(LevoOptionsPanel())
             extensionHook?.hookView?.addMainToolBarComponent(toolbarButton)
         }
     }
