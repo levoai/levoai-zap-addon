@@ -7,6 +7,7 @@ import org.parosproxy.paros.network.HttpMessage
 import org.parosproxy.paros.network.HttpRequestHeader
 import org.parosproxy.paros.network.HttpSender
 import org.zaproxy.zap.network.HttpSenderListener
+import java.util.Base64
 import java.util.UUID
 
 private val CONTENT_TYPES_SUPPORTED_MAP: Map<String, Boolean> = mapOf(
@@ -134,7 +135,7 @@ class LevoHttpSenderListener(private val extensionLevo: ExtensionLevo) : HttpSen
         }
         val request = SatelliteHttpRequest(
             headers = requestHeaders,
-            body = msg?.requestBody?.toString() ?: "",
+            body = Base64.getEncoder().encodeToString(msg?.requestBody?.bytes ?: ByteArray(0)),
             truncated = false,
             bodySha256Digest = null,
             bodyOriginalLength = msg?.requestBody?.length() ?: 0
@@ -148,7 +149,7 @@ class LevoHttpSenderListener(private val extensionLevo: ExtensionLevo) : HttpSen
         }
         val response = SatelliteHttpResponse(
             headers = responseHeaders,
-            body = msg?.responseBody?.toString() ?: "",
+            body = Base64.getEncoder().encodeToString(msg?.responseBody?.bytes ?: ByteArray(0)),
             truncated = false,
             bodySha256Digest = null,
             bodyOriginalLength = msg?.responseBody?.length() ?: 0
