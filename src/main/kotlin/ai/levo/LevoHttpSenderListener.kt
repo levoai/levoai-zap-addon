@@ -195,9 +195,9 @@ class LevoHttpSenderListener(private val extensionLevo: ExtensionLevo) : HttpSen
             HttpHeader.HTTP11
         )
         httpRequestHeader.setHeader(HttpHeader.CONTENT_TYPE, HttpHeader.JSON_CONTENT_TYPE)
-        httpRequestHeader.setHeader(HttpHeader.CONTENT_LENGTH, json.length.toString())
         val httpMessage = HttpMessage(httpRequestHeader)
         httpMessage.requestBody.setBody(json)
+        httpMessage.requestHeader.contentLength = httpMessage.requestBody.length()
 
         HttpSender(HTTP_SENDER_LEVO_INITIATOR).sendAndReceive(httpMessage)
     }

@@ -14,7 +14,6 @@ plugins {
 }
 
 group = "ai.levo"
-version = "0.1.0"
 description = "Build OpenAPI Specs with ZAP traffic using Levo.ai."
 
 repositories {
@@ -40,12 +39,6 @@ zapAddOn {
         url.set("https://levo.ai")
         repo.set("https://github.com/levoai/levoai-zap-addon")
         changesFile.set(tasks.named<ConvertMarkdownToHtml>("generateManifestChanges").flatMap { it.html })
-
-        dependencies {
-            addOns {
-                register("scripts")
-            }
-        }
 
         helpSet {
             baseName.set("help%LC%.helpset")
@@ -85,7 +78,6 @@ val generateReleaseStateLastCommit by tasks.registering(GenerateReleaseStateLast
 val releaseAddOn by tasks.registering {
     if (ReleaseState.read(projectInfo).isNewRelease()) {
         dependsOn(tasks.createRelease)
-        dependsOn(tasks.handleRelease)
         dependsOn(tasks.createPullRequestNextDevIter)
     }
 }
