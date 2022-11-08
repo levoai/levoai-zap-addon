@@ -1,0 +1,24 @@
+name: Prepare Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  prepare-release:
+    name: Prepare Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
+      - name: Prepare Release and Create Pull Request
+        env:
+          LEVOBOT_TOKEN: ${{ secrets.LEVOBOT_TOKEN }}
+        run: ./gradlew createPullRequestRelease

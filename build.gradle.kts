@@ -54,7 +54,7 @@ zapAddOn {
     }
 
     gitHubRelease {
-        user.set(GitHubUser("levobot", "github-bot@levo.ai", System.getenv("GITHUB_TOKEN")))
+        user.set(GitHubUser("levobot", "github-bot@levo.ai", System.getenv("LEVOBOT_TOKEN")))
     }
 }
 
