@@ -182,7 +182,7 @@ class LevoHttpSenderListener(private val extensionLevo: ExtensionLevo) : HttpSen
             traceId = UUID.randomUUID().toString(),
             parentId = null,
             spanId = UUID.randomUUID().toString(),
-            spanKind = "server", // TODO: Should this be client?
+            spanKind = "SERVER", // TODO: Should this be client?
             localNetwork = null,
             remoteNetwork = null
         )
