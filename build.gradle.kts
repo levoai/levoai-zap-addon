@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.zaproxy.gradle.addon.AddOnStatus
+import org.zaproxy.gradle.addon.internal.model.GitHubRepo
 import org.zaproxy.gradle.addon.internal.model.GitHubUser
 import org.zaproxy.gradle.addon.internal.model.ProjectInfo
 import org.zaproxy.gradle.addon.internal.model.ReleaseState
@@ -14,7 +15,6 @@ plugins {
 }
 
 group = "ai.levo"
-version = "0.1.0"
 description = "Build OpenAPI Specs with ZAP traffic using Levo.ai."
 
 repositories {
@@ -85,7 +85,6 @@ val generateReleaseStateLastCommit by tasks.registering(GenerateReleaseStateLast
 val releaseAddOn by tasks.registering {
     if (ReleaseState.read(projectInfo).isNewRelease()) {
         dependsOn(tasks.createRelease)
-        dependsOn(tasks.handleRelease)
         dependsOn(tasks.createPullRequestNextDevIter)
     }
 }
