@@ -15,7 +15,6 @@
  */
 package ai.levo
 
-import org.apache.commons.configuration.ConversionException
 import org.apache.logging.log4j.kotlin.Logging
 import org.zaproxy.zap.common.VersionedAbstractParam
 
@@ -43,11 +42,7 @@ class LevoParam : VersionedAbstractParam(), Logging {
     override fun updateConfigsImpl(fileVersion: Int) {}
 
     override fun parseImpl() {
-        try {
-            enabled = config.getBoolean(PARAM_ENABLED, enabled)
-            satelliteUrl = config.getString(PARAM_SATELLITE_URL, satelliteUrl)
-        } catch (e: ConversionException) {
-            logger.error("Error parsing levoai configuration: ${e.message}", e)
-        }
+        enabled = getBoolean(PARAM_ENABLED, enabled)
+        satelliteUrl = getString(PARAM_SATELLITE_URL, satelliteUrl)
     }
 }
