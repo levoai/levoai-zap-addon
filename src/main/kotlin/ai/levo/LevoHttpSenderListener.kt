@@ -145,7 +145,7 @@ class LevoHttpSenderListener(private val extensionLevo: ExtensionLevo) : HttpSen
                     ?: msg?.requestHeader?.getHeader(HttpRequestHeader.HOST)
                 ),
             ":method" to msg?.requestHeader?.method,
-            ":path" to msg?.requestHeader?.uri?.path
+            ":path" to (msg?.requestHeader?.uri?.path ?: "/")
         )
         for (header in msg?.requestHeader?.headers ?: listOf()) {
             requestHeaders[header.name] = header.value
