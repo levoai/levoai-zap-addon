@@ -62,6 +62,10 @@ spotless {
     }
 }
 
+tasks.prepareNextDevIter {
+    mustRunAfter(tasks.createRelease)
+}
+
 tasks.test {
     useJUnitPlatform()
 }
