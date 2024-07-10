@@ -5,6 +5,9 @@ All notable changes to this add-on will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+
 ## [0.3.0] - 2024-07-10
 ### Added
 - Option to configure an organization ID that is added as a header in the requests made to the Satellite.
@@ -22,6 +25,7 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## [0.1.0] - 2022-11-11
 - First version.
 
+[Unreleased]: https://github.com/levoai/levoai-zap-addon/compare/v0.3.0...HEAD
 [0.3.0]: https://github.com/levoai/levoai-zap-addon/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/levoai/levoai-zap-addon/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/levoai/levoai-zap-addon/compare/cb0a3eda2aa38d87406c3ff1feda9bfd747fbabc...v0.1.0
