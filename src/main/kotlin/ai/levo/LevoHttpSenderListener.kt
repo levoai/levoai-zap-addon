@@ -22,6 +22,7 @@ import org.parosproxy.paros.network.HttpMessage
 import org.parosproxy.paros.network.HttpRequestHeader
 import org.parosproxy.paros.network.HttpSender
 import org.zaproxy.zap.network.HttpSenderListener
+import java.net.InetAddress
 import java.util.Base64
 import java.util.UUID
 
@@ -117,10 +118,20 @@ private val CONTENT_TYPES_SUPPORTED_MAP: Map<String, Boolean> = mapOf(
 
 // Use a non-existent initiator value
 private const val HTTP_SENDER_LEVO_INITIATOR = 1350
+private const val X_LEVO_ORGANIZATION_ID_HEADER = "X-Levo-Organization-Id"
 
 class LevoHttpSenderListener(private val extensionLevo: ExtensionLevo) : HttpSenderListener {
 
     private val gson by lazy { Gson() }
+
+    private val resource by lazy {
+        SatelliteResource(
+            hostName = InetAddress.getLocalHost().hostName,
+            environment = extensionLevo.param.environment,
+            sensorType = "ZAP_PLUGIN",
+            sensorVersion = extensionLevo.addOn.version.toString()
+        )
+    }
 
     override fun getListenerOrder(): Int = Int.MAX_VALUE - 1
 
@@ -176,13 +187,13 @@ class LevoHttpSenderListener(private val extensionLevo: ExtensionLevo) : HttpSen
             httpScheme = msg?.requestHeader?.uri?.scheme ?: "http",
             request = request,
             response = response,
-            resource = mapOf(),
+            resource = resource,
             durationNs = msg?.timeElapsedMillis?.times(1000000) ?: 0,
             requestTimeNs = msg?.timeSentMillis?.times(1000000) ?: 0,
             traceId = UUID.randomUUID().toString(),
             parentId = null,
             spanId = UUID.randomUUID().toString(),
-            spanKind = "SERVER", // TODO: Should this be client?
+            spanKind = "CLIENT",
             localNetwork = null,
             remoteNetwork = null
         )
@@ -195,6 +206,7 @@ class LevoHttpSenderListener(private val extensionLevo: ExtensionLevo) : HttpSen
             HttpHeader.HTTP11
         )
         httpRequestHeader.setHeader(HttpHeader.CONTENT_TYPE, HttpHeader.JSON_CONTENT_TYPE)
+        httpRequestHeader.setHeader(X_LEVO_ORGANIZATION_ID_HEADER, extensionLevo.param.organizationId)
         val httpMessage = HttpMessage(httpRequestHeader)
         httpMessage.requestBody.setBody(json)
         httpMessage.requestHeader.contentLength = httpMessage.requestBody.length()

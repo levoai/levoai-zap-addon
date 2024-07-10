@@ -33,6 +33,13 @@ data class SatelliteHttpResponse(
     @SerializedName("body_original_length") val bodyOriginalLength: Int?
 )
 
+data class SatelliteResource(
+    @SerializedName("host_name") val hostName: String?,
+    @SerializedName("levo_env") val environment: String?,
+    @SerializedName("sensor_type") val sensorType: String?,
+    @SerializedName("sensor_version") val sensorVersion: String?
+)
+
 data class SatelliteNetwork(
     @SerializedName("hostname") val hostname: String?,
     @SerializedName("ip") val ip: String?,
@@ -43,7 +50,7 @@ data class SatelliteMessage(
     @SerializedName("http_scheme") val httpScheme: String?,
     @SerializedName("request") val request: SatelliteHttpRequest,
     @SerializedName("response") val response: SatelliteHttpResponse,
-    @SerializedName("resource") val resource: Map<String, Any>,
+    @SerializedName("resource") val resource: SatelliteResource,
     @SerializedName("duration_ns") val durationNs: Int?,
     @SerializedName("request_time_ns") val requestTimeNs: Long?,
     @SerializedName("trace_id") val traceId: String?,

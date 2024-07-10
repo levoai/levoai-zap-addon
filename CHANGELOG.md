@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+### Added
+- Option to configure an organization ID that is added as a header in the requests made to the Satellite.
+- Option to specify the environment under which the discovered apps will be shown in the Levo dashboard.
+- Set the sensor type in the requests made to the Satellite.
 
 ## [0.2.0] - 2022-12-26
 ### Added

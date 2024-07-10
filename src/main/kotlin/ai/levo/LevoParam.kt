@@ -22,6 +22,8 @@ private const val PARAM_BASE_KEY = "levoai"
 private const val PARAM_CURRENT_VERSION: Int = 1
 private const val PARAM_ENABLED = "$PARAM_BASE_KEY.enabled"
 private const val PARAM_SATELLITE_URL = "$PARAM_BASE_KEY.satelliteUrl"
+private const val PARAM_ORGANIZATION_ID = "$PARAM_BASE_KEY.organizationId"
+private const val PARAM_ENVIRONMENT = "$PARAM_BASE_KEY.environment"
 
 class LevoParam : VersionedAbstractParam(), Logging {
 
@@ -37,6 +39,18 @@ class LevoParam : VersionedAbstractParam(), Logging {
             config.setProperty(PARAM_SATELLITE_URL, value)
         }
 
+    internal var organizationId: String = ""
+        set(value) {
+            field = value
+            config.setProperty(PARAM_ORGANIZATION_ID, value)
+        }
+
+    internal var environment: String = "staging"
+        set(value) {
+            field = value
+            config.setProperty(PARAM_ENVIRONMENT, value)
+        }
+
     override fun getConfigVersionKey(): String = PARAM_BASE_KEY + VERSION_ATTRIBUTE
     override fun getCurrentVersion(): Int = PARAM_CURRENT_VERSION
     override fun updateConfigsImpl(fileVersion: Int) {}
@@ -44,5 +58,7 @@ class LevoParam : VersionedAbstractParam(), Logging {
     override fun parseImpl() {
         enabled = getBoolean(PARAM_ENABLED, enabled)
         satelliteUrl = getString(PARAM_SATELLITE_URL, satelliteUrl)
+        organizationId = getString(PARAM_ORGANIZATION_ID, organizationId)
+        environment = getString(PARAM_ENVIRONMENT, environment)
     }
 }
